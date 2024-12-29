@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "256400991846",
+    "project_id": "be-prepared-37893",
+    "storage_bucket": "be-prepared-37893.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256400991846:android:13700c603e7986a4f96fa7",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.mad.bp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCU9aK_WLZDA6V93zladTON9ef9gdKk9yc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
