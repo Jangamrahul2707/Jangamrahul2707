@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import uk.ac.tees.mad.bp.authentication.model.AuthResponse
+import uk.ac.tees.mad.bp.authentication.model.UserInfo
 import uk.ac.tees.mad.bp.authentication.viewmodel.AuthViewmodel
 import uk.ac.tees.mad.bp.ui.theme.authFam
 import uk.ac.tees.mad.bp.ui.theme.heading
@@ -55,7 +56,6 @@ fun SignUpScreen(
     val context = LocalContext.current
 
     var name by remember { mutableStateOf("") }
-    var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -169,38 +169,6 @@ fun SignUpScreen(
             Text(
                 modifier = Modifier
                     .fillMaxWidth(0.85f),
-                text = "Username",
-                fontSize = 15.sp,
-                fontFamily = poppinsFam
-            )
-            OutlinedTextField(
-                value = username,
-                onValueChange = {
-                    username = it
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.9f),
-                shape = RoundedCornerShape(15.dp),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.Person,
-                        contentDescription = "Username"
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Enter username",
-                        fontSize = 15.sp,
-                        fontFamily = poppinsFam
-                    )
-                }
-            )
-
-            Spacer(modifier = Modifier.weight(0.1f))
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth(0.85f),
                 text = "Email",
                 fontSize = 15.sp,
                 fontFamily = poppinsFam
@@ -285,11 +253,15 @@ fun SignUpScreen(
                 onClick = {
                     if (
                         name.isNotEmpty() &&
-                        username.isNotEmpty() &&
                         email.isNotEmpty() &&
                         password.isNotEmpty()
                     ){
-                        
+                        val user = UserInfo(
+                            name = name,
+                            email = email
+                        )
+
+                        authViewmodel.registerUser(user, password)
                     }else{
                         Toast.makeText(context, "No field should be left empty", Toast.LENGTH_LONG).show()
                     }

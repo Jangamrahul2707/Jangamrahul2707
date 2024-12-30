@@ -1,4 +1,4 @@
-package uk.ac.tees.mad.bp.authentication.navigation
+package uk.ac.tees.mad.bp.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -10,6 +10,8 @@ import uk.ac.tees.mad.bp.ui.mainapp.HomeScreen
 import uk.ac.tees.mad.bp.ui.authentication.LogInScreen
 import uk.ac.tees.mad.bp.ui.authentication.SignUpScreen
 import uk.ac.tees.mad.bp.ui.authentication.SplashScreen
+import uk.ac.tees.mad.bp.ui.mainapp.EditProfileScreen
+import uk.ac.tees.mad.bp.ui.mainapp.ProfileScreen
 
 
 @Composable
@@ -49,6 +51,14 @@ fun CentralNavigation(
         ) {
             composable("home_screen") {
                 HomeScreen(authViewmodel, navController)
+            }
+
+            composable("profile_screen"){
+                ProfileScreen(authViewmodel, navController)
+            }
+
+            composable("edit_profile_screen"){
+                EditProfileScreen(authViewmodel, navController)
             }
         }
     }

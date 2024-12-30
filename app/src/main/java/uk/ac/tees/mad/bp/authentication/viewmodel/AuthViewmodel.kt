@@ -134,7 +134,6 @@ class AuthViewmodel @Inject constructor(
                 val updatedUser = UserInfo(
                     name = userInfo.name,
                     email = userInfo.email,
-                    highestQualification = userInfo.highestQualification,
                     profilePictureUrl = userInfo.profilePictureUrl,
                 )
 
