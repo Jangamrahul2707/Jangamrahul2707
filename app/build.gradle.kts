@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "uk.ac.tees.mad.bp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "uk.ac.tees.mad.bp"

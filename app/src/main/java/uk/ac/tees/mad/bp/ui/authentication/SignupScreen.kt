@@ -1,7 +1,50 @@
 package uk.ac.tees.mad.bp.ui.authentication
 
-
-
+import android.widget.Toast
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.Key
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import uk.ac.tees.mad.bp.authentication.model.AuthResponse
+import uk.ac.tees.mad.bp.authentication.viewmodel.AuthViewmodel
+import uk.ac.tees.mad.bp.ui.theme.authFam
+import uk.ac.tees.mad.bp.ui.theme.heading
+import uk.ac.tees.mad.bp.ui.theme.poppinsFam
 
 
 @Composable
@@ -21,7 +64,7 @@ fun SignUpScreen(
     val authState by authViewmodel.authState.collectAsState()
 
     when(authState){
-        is AuthState.Success->{
+        is AuthResponse.Success->{
             navController.navigate("home_graph"){
                 popUpTo(navController.graph.startDestinationId){
                     inclusive=true
@@ -29,16 +72,16 @@ fun SignUpScreen(
                 launchSingleTop=true
             }
         }
-        is AuthState.Failure->{
-            Toast.makeText(context, (authState as AuthState.Failure).message.toString(), Toast.LENGTH_LONG).show()
+        is AuthResponse.Failure->{
+            Toast.makeText(context, (authState as AuthResponse.Failure).message.toString(), Toast.LENGTH_LONG).show()
             email = ""
             password = ""
-            authViewmodel.updateAuthState()
+            authViewmodel.updateAuth()
         }
-        is AuthState.Loading->{
+        is AuthResponse.Loading->{
 
         }
-        is AuthState.Idle->{
+        is AuthResponse.Idle->{
 
         }
     }
@@ -59,7 +102,7 @@ fun SignUpScreen(
             verticalArrangement = Arrangement.Center
         ){
             Text(
-                text = "Joke Junction",
+                text = "Be Prepared",
                 fontSize = 40.sp,
                 fontFamily = heading,
                 color = Color.White
@@ -246,8 +289,7 @@ fun SignUpScreen(
                         email.isNotEmpty() &&
                         password.isNotEmpty()
                     ){
-                        authViewmodel.RegisterUser(name, username, email, password)
-
+                        
                     }else{
                         Toast.makeText(context, "No field should be left empty", Toast.LENGTH_LONG).show()
                     }
@@ -282,7 +324,7 @@ fun SignUpScreen(
                 }
             ) {
                 Text(
-                    text = "Already registered to Joke Junction?",
+                    text = "Already registered to Be Prepared?",
                     fontSize = 15.sp,
                     fontFamily = poppinsFam
                 )

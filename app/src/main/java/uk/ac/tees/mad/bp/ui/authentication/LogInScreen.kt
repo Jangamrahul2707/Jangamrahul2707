@@ -251,7 +251,7 @@ fun LogInScreen(
                 }
             ) {
                 Text(
-                    text = "New to Joke Junction?",
+                    text = "New to Be Prepared?",
                     fontSize = 15.sp,
                     fontFamily = poppinsFam
                 )
