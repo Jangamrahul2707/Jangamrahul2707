@@ -139,14 +139,7 @@ fun EditProfileScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.linearGradient(
-                    0.2f to Color(0xFFF7A6D0),
-                    0.4f to Color(0xFF94bbe9),
-                    1.0f to Color(0xFFeeaeca)
-                )
-            ),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ){

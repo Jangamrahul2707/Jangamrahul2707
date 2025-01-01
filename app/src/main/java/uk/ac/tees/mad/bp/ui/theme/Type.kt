@@ -41,10 +41,10 @@ val heading = FontFamily(
 )
 
 
-val inter = GoogleFont("Inter")
+val metamorphous = GoogleFont("Metamorphous")
 
-val interFam = FontFamily(
-    Font(googleFont = inter, fontProvider = provider)
+val metamorphousFamily = FontFamily(
+    Font(googleFont = metamorphous, fontProvider = provider)
 )
 
 
