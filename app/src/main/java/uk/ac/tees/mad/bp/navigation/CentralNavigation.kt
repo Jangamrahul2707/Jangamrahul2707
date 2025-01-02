@@ -11,6 +11,7 @@ import uk.ac.tees.mad.bp.ui.authentication.LogInScreen
 import uk.ac.tees.mad.bp.ui.authentication.SignUpScreen
 import uk.ac.tees.mad.bp.ui.authentication.SplashScreen
 import uk.ac.tees.mad.bp.ui.mainapp.EditProfileScreen
+import uk.ac.tees.mad.bp.ui.mainapp.KitItemDetails
 import uk.ac.tees.mad.bp.ui.mainapp.ProfileScreen
 
 
@@ -59,6 +60,10 @@ fun CentralNavigation(
 
             composable("edit_profile_screen"){
                 EditProfileScreen(authViewmodel, navController)
+            }
+
+            composable("kit_item_details"){
+                KitItemDetails()
             }
         }
     }

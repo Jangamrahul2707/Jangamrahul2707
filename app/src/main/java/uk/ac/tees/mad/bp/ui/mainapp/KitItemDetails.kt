@@ -2,9 +2,12 @@ package uk.ac.tees.mad.bp.ui.mainapp
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
@@ -21,7 +24,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
 import uk.ac.tees.mad.bp.ui.theme.BePreparedTheme
 import uk.ac.tees.mad.bp.ui.theme.poppinsFam
 
@@ -32,12 +34,48 @@ fun KitItemDetails(
 ) {
 
     var showAddDialog by remember { mutableStateOf(false) }
+    var newItem by remember { mutableStateOf("") }
 
     if (showAddDialog){
-        ShowAddDialog(
-            onDismiss = {
+        AlertDialog(
+            onDismissRequest = {
                 showAddDialog = false
-            }
+                newItem = ""
+            },
+            title = {
+                Text(
+                    text = "Add new Item to the kit!!",
+                    fontSize = 16.sp,
+                    fontFamily = poppinsFam
+                )
+            },
+            text = {
+                Column {
+                    OutlinedTextField(
+                        value = newItem,
+                        onValueChange = {
+                            newItem = it
+                        }
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Button(
+                        onClick = {
+
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            text = "Add it!",
+                            fontFamily = poppinsFam,
+                            fontSize = 13.sp
+                        )
+                    }
+                }
+            },
+            confirmButton = {},
+            dismissButton = {}
         )
     }
 
@@ -107,35 +145,3 @@ fun KitItemDetails(
 }
 
 
-@Composable
-fun ShowAddDialog(
-    onDismiss: ()->Unit
-){
-    Dialog(
-        onDismissRequest = onDismiss
-    ) {
-        Column {
-            Text(
-                text = "Add item in EarthQuack Kit",
-                fontSize = 18.sp,
-                fontFamily = poppinsFam
-            )
-
-            OutlinedTextField(
-                value = "",
-                onValueChange = {
-
-                }
-            )
-        }
-    }
-}
-
-
-@PreviewLightDark
-@Composable
-fun PreviewKit(modifier: Modifier = Modifier) {
-    BePreparedTheme {
-        KitItemDetails()
-    }
-}

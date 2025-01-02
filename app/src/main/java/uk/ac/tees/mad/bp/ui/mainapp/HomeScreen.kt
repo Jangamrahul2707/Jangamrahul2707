@@ -90,7 +90,10 @@ fun HomeScreen(
         ){
             LazyColumn {
                 items(20){
-                    KitItem(modifier = modifier.padding(horizontal = 10.dp, vertical = 10.dp))
+                    KitItem(
+                        navController = navController,
+                        modifier = modifier.padding(horizontal = 10.dp, vertical = 10.dp)
+                    )
                 }
             }
         }
@@ -99,12 +102,13 @@ fun HomeScreen(
 
 @Composable
 fun KitItem(
+    navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         onClick = {
-
+            navController.navigate("kit_item_details")
         }
     ) {
         Column (
@@ -147,13 +151,5 @@ fun KitItem(
             )
 
         }
-    }
-}
-
-@Preview
-@Composable
-fun KitItempreview(){
-    BePreparedTheme {
-        KitItem()
     }
 }
