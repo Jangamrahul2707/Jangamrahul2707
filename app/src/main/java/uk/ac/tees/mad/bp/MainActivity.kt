@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import uk.ac.tees.mad.bp.navigation.CentralNavigation
 import uk.ac.tees.mad.bp.authentication.viewmodel.AuthViewmodel
+import uk.ac.tees.mad.bp.mainapp.viewmodel.MainViewmodel
 import uk.ac.tees.mad.bp.ui.theme.BePreparedTheme
 
 
@@ -24,6 +25,8 @@ import uk.ac.tees.mad.bp.ui.theme.BePreparedTheme
 class MainActivity : ComponentActivity() {
 
     private val authViewmodel by viewModels<AuthViewmodel>()
+    private val mainViewmodel by viewModels<MainViewmodel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -32,7 +35,11 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
 
             BePreparedTheme {
-                CentralNavigation(authViewmodel, navController)
+                CentralNavigation(
+                    mainViewmodel,
+                    authViewmodel,
+                    navController
+                )
             }
         }
     }

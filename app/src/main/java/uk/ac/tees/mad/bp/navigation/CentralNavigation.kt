@@ -6,10 +6,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import uk.ac.tees.mad.bp.authentication.viewmodel.AuthViewmodel
+import uk.ac.tees.mad.bp.mainapp.viewmodel.MainViewmodel
 import uk.ac.tees.mad.bp.ui.mainapp.HomeScreen
 import uk.ac.tees.mad.bp.ui.authentication.LogInScreen
 import uk.ac.tees.mad.bp.ui.authentication.SignUpScreen
 import uk.ac.tees.mad.bp.ui.authentication.SplashScreen
+import uk.ac.tees.mad.bp.ui.mainapp.AddNewKit
 import uk.ac.tees.mad.bp.ui.mainapp.EditProfileScreen
 import uk.ac.tees.mad.bp.ui.mainapp.KitItemDetails
 import uk.ac.tees.mad.bp.ui.mainapp.ProfileScreen
@@ -17,6 +19,7 @@ import uk.ac.tees.mad.bp.ui.mainapp.ProfileScreen
 
 @Composable
 fun CentralNavigation(
+    mainViewmodel: MainViewmodel,
     authViewmodel: AuthViewmodel,
     navController: NavHostController
 ){
@@ -51,7 +54,11 @@ fun CentralNavigation(
             route = "home_graph"
         ) {
             composable("home_screen") {
-                HomeScreen(authViewmodel, navController)
+                HomeScreen(
+                    mainViewmodel,
+                    authViewmodel,
+                    navController
+                )
             }
 
             composable("profile_screen"){
@@ -63,7 +70,12 @@ fun CentralNavigation(
             }
 
             composable("kit_item_details"){
-                KitItemDetails()
+                KitItemDetails(
+                    mainViewmodel
+                )
+            }
+            composable("add_new_kit") {
+                AddNewKit(mainViewmodel, navController)
             }
         }
     }
